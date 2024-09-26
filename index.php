@@ -3,7 +3,6 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Markify</title>
 </head>
@@ -47,6 +46,11 @@
             </ol>
         </h4>
         <h1>Login</h1>
+        <?php
+        if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["error"]) && $_POST["error"] == "login error") {
+            print("<p style=\"color: red;\">Incorrect Username or Password. Please try again.</p>");
+        }
+        ?>
         <form id="login-form" method="post" action="login.php">
             <p>Username </p> <input name="username" class="login-input" type="text">
             <p>Password </p> <input name="password" class="login-input" type="password">
