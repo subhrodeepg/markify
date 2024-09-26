@@ -240,6 +240,7 @@
                 print '<form method="POST" action="" style="display:inline;" onsubmit="return validateURL(this);">';
                 print '<input type="text" name="website_url" oninput = "validateInputURL(event)">';
                 print '<input type="hidden" name="username" value="' . $_POST["username"] . '">';
+                print '<input type="hidden" name="key" value="' . encryptPassword($_POST["username"], $_POST["password"], $encryption_iv) . '">';
                 print '<input type="hidden" name="update_id" value="' . $row["bookmark_id"] . '">';
                 print '<button type="submit">Submit Edit</button>';
                 print "</form>";
