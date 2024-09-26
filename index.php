@@ -64,7 +64,7 @@
     </div>
     <script>
         document.getElementById('sign-up').addEventListener('click', function () {
-            window.location.href = 'http://localhost:3000/assignment_1/src/sign-up.php';
+            window.location.href = 'https://markify-c9bnayeubnagc9ad.canadacentral-01.azurewebsites.net/sign-up.php';
         });
     </script>
 </body>
