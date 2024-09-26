@@ -13,7 +13,7 @@
 
     <?php
     function connectToDatabase() {
-        $database = mysqli_connect("localhost", "root", "password123", "bookmarks");
+        $database = mysqli_connect('easy-learn-server.mysql.database.azure.com', 'mwvasqfzwh', 'Password123?', 'bookmarks');
         if (!$database) {
             die("Could not connect to the database</body></html>");
         }

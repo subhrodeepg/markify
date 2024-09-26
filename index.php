@@ -21,7 +21,7 @@
                             <?php
                             function connectToDatabase()
                             {
-                                $database = mysqli_connect("localhost", "root", "password123", "bookmarks");
+                                $database = mysqli_connect('easy-learn-server.mysql.database.azure.com', 'mwvasqfzwh', 'Password123?', 'bookmarks');
                                 if (!$database) {
                                     die("Could not connect to the database</body></html>");
                                 }
@@ -33,14 +33,11 @@
                                         ORDER BY bookmark_count DESC
                                         LIMIT 10;";
 
-                            if (!($database = mysqli_connect("localhost", "root", "password123")))
-                                die("Could not connect to the database</body></html>");
+                            $database = connectToDatabase();
 
-                            if (!mysqli_select_db($database, "bookmarks"))
-                                die("Could not find bookmarks db");
+                            mysqli_select_db($database, "bookmarks");
 
-                            if (!($result = mysqli_query($database, $query)))
-                                die("Could not run the query" . $query);
+                            $result = mysqli_query($database, $query);
 
                             while ($row = mysqli_fetch_assoc($result)) {
                                 echo "<li><a href='" . $row["website_url"] . "' target='_blank'>" . $row["website_url"] . "</a></li>";
