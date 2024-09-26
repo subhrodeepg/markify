@@ -1,12 +1,12 @@
 body {
-    margin: 20px;
-    background-color: #1F316F;
-    color: #F9DBBA;
-  }
+    margin: 100px auto 0px;
+    background-color: #222831;
+    color: #EEEEEE;
+}
 
-  h1 {
-      text-align: center;
-  }
+h1 {
+    text-align: center;
+}
 
 h2 {
     margin: 20px 0px 20px 0px;
@@ -24,9 +24,12 @@ h4 {
 }
 
 
-input[type=text], input[type=password] {
-    border-radius: 10px;
+input[type=text],
+input[type=password] {
+    border-radius: 5px;
     border: 3px solid red;
+    padding: 10px 20px;
+    border-radius: 5px;
 }
 
 .flex-container {
@@ -36,13 +39,6 @@ input[type=text], input[type=password] {
     flex-wrap: wrap;
 }
 
-.content {
-    padding: 40px 0px; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-}
 
 .add-bookmark-form {
     padding-bottom: 20px;
@@ -53,27 +49,18 @@ a {
 }
 
 button {
-    text-align: center;
+    padding: 10px 20px;
     border: none;
+    border-radius: 5px;
 }
 
-.floating-button {
-    background-color: red;
-    float: right; 
-    margin-top: -60px; 
-}
-
-#logoff{
-    background-color: red;
-}
-
-#sign-up{
-    background-color: green;
+.submit-login-buttons {
+    margin-top: 20px;
+    justify-content: space-between;
 }
 
 .delete-button {
     background-color: red;
-    border-radius: 100%;
 }
 
 .edit-button {
@@ -84,13 +71,43 @@ button {
     border: 3px solid black !important;
 }
 
-.card{
+.card {
     box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2);
     width: 35%;
     padding: 20px;
     text-align: center;
 }
 
-.enroll-button{
+.enroll-button {
     background-color: #7C93C3;
+}
+
+.login,
+.sign-up,
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav-bar {
+    background-color: #393E46;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    color: #00ADB5;
+}
+
+#welcome-msg {
+    margin-left: 50px;
+}
+
+.button-div {
+    display: flex;
+    gap: 10px;
+    margin-right: 50px;
 }
