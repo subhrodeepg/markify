@@ -258,6 +258,30 @@
             document.getElementById('logoff-button').addEventListener('click', function () {
                 window.location.href = 'https://markify-c9bnayeubnagc9ad.canadacentral-01.azurewebsites.net/index.php';
             });
+
+            function validateInputURL(event) {
+                    const textbox = event.target; 
+                    const input = textbox.value;
+                    try {
+                        const url = new URL(input);
+                        textbox.style.borderColor = 'green';
+                    } catch (error) {
+                        textbox.style.borderColor = 'red';
+                    }
+                }
+
+                function validateURL(form) {
+                    try {
+                        const url = new URL(form.elements['website_url'].value);
+
+                        return true;
+
+                    } catch (error) {
+                        alert("Bookmark is not in the correct URL format. Are you forgetting the http or https?");
+
+                        return false;
+                    }
+                }
         </script>
     </div>
 </body>
