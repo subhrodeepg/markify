@@ -185,6 +185,8 @@
             if (!curl_errno($ch)) {
                 $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
+                $database = connectToDatabase();
+
                 if ($httpCode < 400) {
                     updateBookmark($database);
                 } else {
