@@ -23,6 +23,7 @@
     <div class="home">
 
         <?php
+        $encryption_iv = '9876543211234567';
         function connectToDatabase()
         {
             $database = mysqli_connect('easy-learn-server.mysql.database.azure.com', 'mwvasqfzwh', 'Password123?', 'bookmarks');
@@ -135,6 +136,20 @@
             return mysqli_stmt_get_result($stmt);
         }
 
+        function encryptPassword($username, $password, $encryption_iv)
+        {
+            return openssl_encrypt($password, "AES-128-CTR", $username, 0, $encryption_iv);
+        }
+
+        function decryptPassword($username, $encrypted_key, $encryption_iv)
+        {
+            return openssl_decrypt($encrypted_key, "AES-128-CTR", $username, 0, $encryption_iv);
+        }
+
+        if(isset($_POST["key"])){
+            $_POST["password"] = decryptPassword($_POST["username"], $_POST["key"], $encryption_iv);
+        }
+
         if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["password"])) {
             validateUser();
         }
@@ -212,6 +227,7 @@
                 print "<td>";
                 print '<form method="POST" action="" style="display:inline;">';
                 print '<input type="hidden" name="username" value="' . $_POST["username"] . '">';
+                print '<input type="hidden" name="key" value="' . encryptPassword($_POST["username"], $_POST["password"], $encryption_iv) . '">';
                 print '<input type="hidden" name="delete_id" value="' . $row["bookmark_id"] . '">';
                 print '<button type="submit" class="delete-button">X</button>';
                 print "</form>";
@@ -259,28 +275,28 @@
             });
 
             function validateInputURL(event) {
-                    const textbox = event.target; 
-                    const input = textbox.value;
-                    try {
-                        const url = new URL(input);
-                        textbox.style.borderColor = 'green';
-                    } catch (error) {
-                        textbox.style.borderColor = 'red';
-                    }
+                const textbox = event.target;
+                const input = textbox.value;
+                try {
+                    const url = new URL(input);
+                    textbox.style.borderColor = 'green';
+                } catch (error) {
+                    textbox.style.borderColor = 'red';
                 }
+            }
 
-                function validateURL(form) {
-                    try {
-                        const url = new URL(form.elements['website_url'].value);
+            function validateURL(form) {
+                try {
+                    const url = new URL(form.elements['website_url'].value);
 
-                        return true;
+                    return true;
 
-                    } catch (error) {
-                        alert("Bookmark is not in the correct URL format. Are you forgetting the http or https?");
+                } catch (error) {
+                    alert("Bookmark is not in the correct URL format. Are you forgetting the http or https?");
 
-                        return false;
-                    }
+                    return false;
                 }
+            }
         </script>
     </div>
 </body>
