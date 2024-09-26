@@ -1,0 +1,96 @@
+body {
+    margin: 20px;
+    background-color: #1F316F;
+    color: #F9DBBA;
+  }
+
+  h1 {
+      text-align: center;
+  }
+
+h2 {
+    margin: 20px 0px 20px 0px;
+}
+
+h3 {
+    margin: 20px 0px 20px 0px;
+    position: relative;
+    justify-content: center;
+}
+
+h4 {
+    font-weight: 80;
+    margin: 20px 0px 20px 0px;
+}
+
+
+input[type=text], input[type=password] {
+    border-radius: 10px;
+    border: 3px solid red;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.content {
+    padding: 40px 0px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.add-bookmark-form {
+    padding-bottom: 20px;
+}
+
+a {
+    color: #F9DBBA;
+}
+
+button {
+    text-align: center;
+    border: none;
+}
+
+.floating-button {
+    background-color: red;
+    float: right; 
+    margin-top: -60px; 
+}
+
+#logoff{
+    background-color: red;
+}
+
+#sign-up{
+    background-color: green;
+}
+
+.delete-button {
+    background-color: red;
+    border-radius: 100%;
+}
+
+.edit-button {
+    background-color: white;
+}
+
+.login-input {
+    border: 3px solid black !important;
+}
+
+.card{
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2);
+    width: 35%;
+    padding: 20px;
+    text-align: center;
+}
+
+.enroll-button{
+    background-color: #7C93C3;
+}
