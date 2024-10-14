@@ -3,4 +3,4 @@ env: flex
 
 runtime_config:
   operating_system: "ubuntu22"
-  document_root: .
+  document_root: markify
