@@ -2,4 +2,5 @@ runtime: php
 env: flex
 
 runtime_config:
-  document_root: markify
+  operating_system: "ubuntu22"
+  document_root: .
