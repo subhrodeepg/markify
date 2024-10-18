@@ -281,18 +281,9 @@
                 const textbox = event.target;
                 const input = textbox.value;
 
-                // try {
-                //     const url = new URL(input);
-                //     
-                // } catch (error) {
-                //     textbox.style.borderColor = 'red';
-                // }
+                var res = input.match(/^(https:\/\/|http:\/\/)?(www\.)?([-a-zA-Z0-9]{2,})(\.[a-z]{2,8})(\/[a-zA-Z0-9?/:@~!$&'()*+,;=.-]*)?$/);
 
-                var res = input.match(/^(https:\/\/|http:\/\/)?(www\.)([-a-zA-Z0-9]{2,})(\.[a-z]{2,8})(\/[a-zA-Z0-9?/:@-.~!$&'()*+,;=]*)?$/);
-
-                console.log(res);
-
-                if(res !== null){
+                if(res !== null && res[3] !== "www"){
                     textbox.style.borderColor = 'green';
                 } else{
                     textbox.style.borderColor = 'red';
@@ -311,7 +302,6 @@
                     xmlhttp.onreadystatechange = function() {
                         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                             const http_code = xmlhttp.responseText;
-                            console.log(http_code);
                             if ( http_code != null && http_code.length > 0 && http_code < 400 && http_code >= 200) {
                                 form.submit();
                             } else {
