@@ -55,7 +55,7 @@ button {
     background-color: red;
 }
 
-.edit-button {
+.edit-button, .add-button {
     background-color: white;
 }
 

@@ -55,8 +55,7 @@
                             </form>
                             <script type='text/javascript'>
                                 document.getElementById('redirect-form').submit();
-                            </script>");
-                ;
+                            </script>");;
                 exit();
             }
         }
@@ -146,7 +145,7 @@
             return openssl_decrypt($encrypted_key, "AES-128-CTR", $username, 0, $encryption_iv);
         }
 
-        if(isset($_POST["key"])){
+        if (isset($_POST["key"])) {
             $_POST["password"] = decryptPassword($_POST["username"], $_POST["key"], $encryption_iv);
         }
 
@@ -208,7 +207,8 @@
                 <h3>Add Bookmark</h3>
                 <input type="text" id="website_url" name="website_url" oninput="validateInputURL(event)" required>
                 <input type="hidden" value="<?php print $_POST["username"]; ?>" name="username">
-                <button type="submit" class="edit-button">Add Bookmark</button>
+                <input type="hidden" value="<?php print encryptPassword($_POST["username"], $_POST["password"], $encryption_iv); ?>" name="key">
+                <button type="submit" class="add-button">Add Bookmark</button>
             </form>
         </div>
 
@@ -259,7 +259,7 @@
             const editButtons = document.querySelectorAll('.edit-button');
 
             editButtons.forEach(button => {
-                button.addEventListener('click', function () {
+                button.addEventListener('click', function() {
                     const text = button.innerText;
                     const idx = button.id.split('-')[1];
 
@@ -273,17 +273,28 @@
                 });
             });
 
-            document.getElementById('logoff-button').addEventListener('click', function () {
+            document.getElementById('logoff-button').addEventListener('click', function() {
                 window.location.href = 'https://markify-c9bnayeubnagc9ad.canadacentral-01.azurewebsites.net/index.php';
             });
 
             function validateInputURL(event) {
                 const textbox = event.target;
                 const input = textbox.value;
-                try {
-                    const url = new URL(input);
+
+                // try {
+                //     const url = new URL(input);
+                //     
+                // } catch (error) {
+                //     textbox.style.borderColor = 'red';
+                // }
+
+                var res = input.match(/^(https:\/\/|http:\/\/)?(www\.)([-a-zA-Z0-9]{2,})(\.[a-z]{2,8})(\/[a-zA-Z0-9?/:@-.~!$&'()*+,;=]*)?$/);
+
+                console.log(res);
+
+                if(res !== null){
                     textbox.style.borderColor = 'green';
-                } catch (error) {
+                } else{
                     textbox.style.borderColor = 'red';
                 }
             }
@@ -291,14 +302,30 @@
             function validateURL(form) {
                 try {
                     const url = new URL(form.elements['website_url'].value);
+                    event.preventDefault();
 
-                    return true;
+                    let xmlhttp = new XMLHttpRequest();
+                    xmlhttp.open("GET", "verifyURL.php?website_url=" + form.elements['website_url'].value, true);
+                    xmlhttp.send();
+
+                    xmlhttp.onreadystatechange = function() {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                            const http_code = xmlhttp.responseText;
+                            console.log(http_code);
+                            if ( http_code != null && http_code.length > 0 && http_code < 400 && http_code >= 200) {
+                                form.submit();
+                            } else {
+                                alert("The bookmark URL is not active or request for verification has been denied.");
+                                return false;
+                            }
+                        }
+                    };
 
                 } catch (error) {
                     alert("Bookmark is not in the correct URL format. Are you forgetting the http or https?");
-
-                    return false;
                 }
+
+                return false;
             }
         </script>
     </div>
